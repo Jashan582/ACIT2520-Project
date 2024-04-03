@@ -1,5 +1,5 @@
 let database = require("../database");
-
+// use const user = req.user and change database.cindy
 let remindersController = {
   list: (req, res) => {
     res.render("reminder/index", { reminders: database.cindy.reminders });
@@ -42,6 +42,21 @@ let remindersController = {
 
   update: (req, res) => {
     // implementation here 👈
+    let newReminder = {
+      id: Number(req.params.id),
+      title: req.body.title,
+      description: req.body.description,
+      completed: Boolean(req.body.completed),
+    };
+    console.log(newReminder)
+    database.cindy.reminders.forEach(reminder => {
+      if (reminder.id === Number(req.params.id)){
+        reminder.title = req.body.title;
+        reminder.description = req.body.description;
+        reminder.completed = Boolean(req.body.completed);
+      }
+    })
+    res.redirect("/reminders")
   },
 
   delete: (req, res) => {
