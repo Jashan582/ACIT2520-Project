@@ -2,4 +2,4 @@
 ## April 4th (First Sprint)
 ### Aaron Dimatulac:
 #### I worked on the following tasks:
-..* Update reminder - This task is responsible for updating reminders
+1. Update reminder - This task is responsible for updating reminders
