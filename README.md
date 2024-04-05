@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Breakdown of work:
 April 4th (First Sprint Complete)
 Jashan Dosanjh
@@ -17,6 +16,3 @@ I worked on the following tasks:
 4. <Insert Some Task Here> - This task is responsible for xyz functionality.
 
 
-=======
-
->>>>>>> 00d8ca99e34abc13713196faf8745334be404468
