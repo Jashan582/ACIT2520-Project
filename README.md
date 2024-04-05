@@ -1,5 +1,5 @@
-Breakdown of work:
-April 4th (First Sprint Complete)
+# Breakdown of work:
+## April 4th (First Sprint Complete)
 Jashan Dosanjh
 I worked on the following tasks:
 1. <Watch Videos one-three> - This task is responsible for giving me the understanding of the starter code, and more insight on the project.
