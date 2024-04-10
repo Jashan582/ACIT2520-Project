@@ -10,7 +10,7 @@ I worked on the following tasks:
 
 I also needed to research on Youtube and Google the following things:
 1. <I had to research on what things like findIndex do and how to work with them. The research was through google, >-
-
+2. <I also needed to go through stack overflow to try to figure out how to implement admin capabilities in this project>
 Aaron:
 I worked on the following tasks:
 1. <Watch Videos one-three,>- This task is responsible for giving me the understanding of the starter code, and more insight on the project.

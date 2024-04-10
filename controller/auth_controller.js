@@ -13,7 +13,7 @@ let authController = {
     const{email, password} = req.body;
     const user = Database.users.find(user => user.email === email && user.password === password);
     if(user){
-      req.session.user = user;
+      req.session.user = { ...user};
       res.redirect("/reminders");
     }else{
       res.redirect("/login");

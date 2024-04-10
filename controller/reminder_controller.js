@@ -1,15 +1,15 @@
 let Database = require("../database");
 // use const user = req.user and change database.cindy
-let remindersController = {
-  list: (req, res) => {
+const remindersController = {
+  list: (req,res) => {
     if(req.session.user){
-      res.render("reminder/index",{reminders:req.session.user.reminder});
+      res.render("reminder/index",{reminders: req.session.user.reminders});
     }else{
       res.redirect("/login");
     }
   },
 
-  new: (req, res) => {
+  new:(req, res) => {
     res.render("reminder/create");
   },
 
@@ -29,17 +29,16 @@ let remindersController = {
   },
 
   create: (req, res) => {
-    if (!req.session.user) {
+    if (!req.session.user){
       return res.redirect("/login");
     }
-  
+
     let newReminder = {
       id: req.session.user.reminders.length + 1,
       title: req.body.title,
       description: req.body.description,
       completed: false,
     };
-  
     req.session.user.reminders.push(newReminder);
     res.redirect("/reminders");
   },
