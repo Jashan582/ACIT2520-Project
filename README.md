@@ -7,7 +7,7 @@ I worked on the following tasks:
 3. <Complete loginSubmit,>- This task is resposible for logging in users with email and password
 4. <Create admin controller, create admin middleware, create admin view, create admin route>- this task it resposible for being able to remotelt distroy a session
 5. <Change hard-code in reminder_controller,>- This task is resposible for showing the reminders of the logged in user
-6. <Modify Delete Function,>- This task is resposible for making sure Authenticated users should not be able to delete other authenticated users reminders.
+reminders.
 
 I also needed to research on Youtube and Google the following things:
 1. <I had to research on what things like findIndex do and how to work with them. The research was through google, >
@@ -16,8 +16,11 @@ I also needed to research on Youtube and Google the following things:
 Aaron:
 I worked on the following tasks:
 1. <Watch Videos one-three,>- This task is responsible for giving me the understanding of the starter code, and more insight on the project.
-2. <update reminder,>- This task is responsible for updating reminders
-3. <Insert Some Task Here,>- This task is responsible for xyz functionality.
-4. <Insert Some Task Here,>- This task is responsible for xyz functionality.
+2. <Update reminder>- This task is responsible for updating reminders
 
+## April 11th
+Jashan Dosanjh
+1. <Modify Delete Function,>- This task is resposible for making sure Authenticated users should not be able to delete other authenticated users 
 
+Aaron
+1. <Register user>- This task is responsible for register users
