@@ -15,6 +15,21 @@ let Database = {
         },
       ],
     },
+    {
+      id: 2,
+      name: "CoolGuy",
+      email: "jashan@gmail.com",
+      password: "jas",
+      isAdmin: true,
+      reminders:[
+        {
+          id: 1,
+          title: "Study for finals",
+          description: "you will fail if you dont",
+          completed: false,
+        }
+      ]
+    }
   ],
   sessions: []
 };

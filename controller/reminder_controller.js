@@ -82,13 +82,17 @@ const remindersController = {
       return res.redirect("/login");
     }
   
-    const index = req.session.user.reminders.findIndex(reminder => reminder.id == req.params.id);
+    const index = reminders.findIndex(reminder => reminder.id.toString() === reminderId);
+    const reminderId = req.params.id;
+    const reminders = req.session.user.reminders;
+
     if (index !== -1) {
-      req.session.user.reminders.splice(index, 1);
+      reminders.splice(index, 1);
+      res.redirect("/reminders");
+    }else{
+      res.status(403).send("you cant delete a reminder that you did not create");
     }
-  
-    res.redirect("/reminders");
   },
-};  
+}
 
 module.exports = remindersController;
