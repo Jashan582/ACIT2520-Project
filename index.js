@@ -43,8 +43,8 @@ app.get("/register", authController.register);
 app.get("/login", authController.login);
 app.post("/register", authController.registerSubmit);
 app.post("/login", authController.loginSubmit);
-const adminRouter = require("./routes/adminRoutes")
-app.get("/admin", adminRouter)
+// const adminRouter = require("./routes/adminRoutes")
+// app.get("/admin", adminRouter)
 app.listen(3001, function () {
   console.log(
     "Server running. Visit: http://localhost:3001/reminders in your browser 🚀"
