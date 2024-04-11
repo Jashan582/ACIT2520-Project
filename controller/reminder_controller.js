@@ -2,10 +2,13 @@ let Database = require("../database");
 // use const user = req.user and change database.cindy
 const remindersController = {
   list: (req,res) => {
+    // console.log("Im here")
+    // console.log(req.session.user)
     if(req.session.user){
+      console.log(req.session.user)
       res.render("reminder/index",{reminders: req.session.user.reminders});
     }else{
-      res.redirect("/login");
+      res.redirect("/auth/login");
     }
   },
 
