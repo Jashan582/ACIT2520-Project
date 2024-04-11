@@ -24,8 +24,13 @@ let authController = {
 
   registerSubmit: (req, res) => {
     //implement later
-    console.log("im here")
     const{name, email, password} = req.body
+    const existingUser = Database.users.some(user => user.email === email);
+    if (existingUser) {
+      // Handle the case where the user tries to register with an existing email
+      res.status(409).send("An account with this email already exists.");
+      return; // Stop further execution in this callback
+    }
     const id = Database.users.length
     const user = {
       id:id,
