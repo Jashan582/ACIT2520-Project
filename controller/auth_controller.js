@@ -24,6 +24,27 @@ let authController = {
 
   registerSubmit: (req, res) => {
     //implement later
+    console.log("im here")
+    const{name, email, password} = req.body
+    const id = Database.users.length
+    const user = {
+      id:id,
+      name: name,
+      email: email,
+      password: password,
+      isAdmin: false,
+      reminders:[
+      ],
+    }
+    console.log(user)
+    Database.users.push(user)
+    if(user){
+      req.session.user = { ...user};
+      res.redirect("/reminders");
+    }else{
+      res.redirect("/login");
+
+    }
   },
 };
 
