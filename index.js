@@ -9,9 +9,9 @@ const reminderController = require("./controller/reminder_controller");
 const authController = require("./controller/auth_controller");
 const authRoute = require("./routes/authRoute");
 const indexRoute = require("./routes/indexRoute");
-
+const adminRoute = require("./routes/adminRoute")
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.use(
   session({
@@ -45,22 +45,22 @@ app.post("/reminder/update/:id", reminderController.update);
 app.post("/reminder/delete/:id", reminderController.delete);
 
 // Logging middleware
-app.use((req, res, next) => {
-  console.log(`User details are: `);
-  console.log(req.user);
+// app.use((req, res, next) => {
+//   console.log(`User details are: `);
+//   console.log(req.user);
 
-  console.log("Entire session object:");
-  console.log(req.session);
+//   console.log("Entire session object:");
+//   console.log(req.session);
 
-  console.log(`Session details are: `);
-  console.log(req.session.passport);
-  next();
-});
+//   console.log(`Session details are: `);
+//   console.log(req.session.passport);
+//   next();
+// });
 
 // Routes
 app.use("/", indexRoute);
 app.use("/auth", authRoute);
-
+app.use("/admin", adminRoute);
 app.listen(3001, function () {
   console.log(
     "Server running. Visit: http://localhost:3001/reminders in your browser 🚀"

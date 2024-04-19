@@ -7,9 +7,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/reminders", ensureAuthenticated, (req, res) => {
-  res.render("reminder/index", {
-    user: req.session.user,
-  });
+    res.redirect("reminders")
 });
 
 module.exports = router;

@@ -2,11 +2,8 @@ let Database = require("../database");
 // use const user = req.user and change database.cindy
 const remindersController = {
   list: (req,res) => {
-    // console.log("Im here")
-    // console.log(req.session.user)
-    if(req.session.user){
-      console.log(req.session.user)
-      res.render("reminder/index",{reminders: req.session.user.reminders});
+    if(req.user){
+      res.render("reminder/index",{reminders: req.user.reminders});
     }else{
       res.redirect("/auth/login");
     }
@@ -18,7 +15,7 @@ const remindersController = {
 
   listOne: (req, res) => {
     if(!req.session.user){
-      return res.redirect("/login")
+      return res.redirect("/auth/login")
     }
 
     let reminderToFind = req.params.id;
@@ -33,7 +30,7 @@ const remindersController = {
 
   create: (req, res) => {
     if (!req.session.user){
-      return res.redirect("/login");
+      return res.redirect("/auth/login");
     }
 
     let newReminder = {
@@ -49,7 +46,7 @@ const remindersController = {
 
   edit: (req, res) => {
     if(!req.session.user){
-      return res.redirect("/login");
+      return res.redirect("/auth/login");
     }
 
     let reminderToFind = req.params.id;
@@ -64,7 +61,7 @@ const remindersController = {
 
   update: (req, res) => {
     if (!req.session.user) {
-      return res.redirect("/login");
+      return res.redirect("/auth/login");
     }
   
     let reminders = req.session.user.reminders;

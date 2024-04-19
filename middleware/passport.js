@@ -1,6 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const userController = require("../controller/user_controller");
+const userController = require("../controller/userController");
+const {database} = require("../models/userModel")
 const localLogin = new LocalStrategy(
   {
     usernameField: "email",
@@ -8,6 +9,14 @@ const localLogin = new LocalStrategy(
   },
   (email, password, done) => {
     const user = userController.getUserByEmailIdAndPassword(email, password);
+    if(user){
+        database.sessions.push({user: {userId: user.id, email: user.email, name: user.name, password: user.password,
+        isAdmin: user.isAdmin},
+        reminders:[user.reminders],
+        // sessionId: req.sessions.id
+        })
+        console.log(database.sessions.reminders)
+    }
     return user
       ? done(null, user)
       : done(null, false, {

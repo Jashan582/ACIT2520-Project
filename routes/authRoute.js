@@ -4,7 +4,8 @@ const { forwardAuthenticated } = require("../middleware/checkAuth");
 
 const router = express.Router();
 
-router.get("/login", forwardAuthenticated, (req, res) => res.render("auth/login"));
+router.get("/login", forwardAuthenticated, (req, res) => res.render("auth/login.ejs"));
+
 
 router.post(
   "/login",
