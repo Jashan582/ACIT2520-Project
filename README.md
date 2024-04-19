@@ -32,3 +32,11 @@ Jashan Dosanjh
 
 2. <Changed everything to use passport,> This task is resposible for making sure all our code uses passport to work.
 
+Aaron Dimatulac
+1. <Fix admin> This task is resposible for fixing revoking sessions
+
+2. <Implemented passport> This task is resposible for making sure all our code uses passport to work.
+
+3. <Implemented logout> This task is resposible for logging out users.
+
+4. <Fixed reminder controller> This task is resposible for fixing reminders.
