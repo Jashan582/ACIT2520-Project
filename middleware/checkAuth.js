@@ -1,15 +1,17 @@
-module.exports = {
-    ensureAuthenticated: function (req, res, next) {
-      if (req.isAuthenticated()) {
-        return next();
-      }
-      res.redirect("/auth/login");
-    },
-    forwardAuthenticated: function (req, res, next) {
-      if (!req.isAuthenticated()) {
-        return next();
-      }
-      res.redirect("/reminders");
-    },
-  };
+const ensureAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/auth/login");
+};
+
+const forwardAuthenticated = (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/reminders");
+};
+
+module.exports = { ensureAuthenticated, forwardAuthenticated };
+
   
