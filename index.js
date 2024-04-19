@@ -2,11 +2,9 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const ejsLayouts = require("express-ejs-layouts");
+const reminderController = require("./controller/reminder_controller");
+const authController = require("./controller/auth_controller");
 const session = require('express-session');
-const passport = require("passport");
-
-// Initialize Passport configuration
-require('./middleware/passport');
 
 // Express session setup
 app.use(session({
@@ -18,37 +16,33 @@ app.use(session({
       secure: false,
       maxAge: 24 * 60 * 60 * 1000,
     },
-}));
+  })
+);
 
-// Initialize Passport and session for persistent login sessions
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Static files and form parsing
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: true }));
 
-// Layout and view engine setup
+app.use(express.urlencoded({ extended: false }));
+
 app.use(ejsLayouts);
 app.set("view engine", "ejs");
 
-// Import routes
-const reminderRoutes = require("./routes/reminderRoutes"); // Define these routes in a separate file
-const authRoutes = require("./routes/authRoutes"); // Define these routes in a separate file
-const adminRoutes = require("./routes/adminRoutes"); // Make sure isAdmin middleware uses Passport
+// Routes start here
+app.get("/reminders", reminderController.list);
+app.get("/reminder/new", reminderController.new);
+app.get("/reminder/:id", reminderController.listOne);
+app.get("/reminder/:id/edit", reminderController.edit);
+app.post("/reminder/", reminderController.create);
+// ⭐ Implement these two routes below!
+app.post("/reminder/update/:id", reminderController.update);
+app.post("/reminder/delete/:id", reminderController.delete);
 
-// Use routes
-app.use('/auth', authRoutes); // Note: I changed this to '/auth' to match the route import above
-app.use('/reminders', reminderRoutes);
-app.use('/admin', adminRoutes);
-
-// Additional routes can be added below
-// ...
-// For handling login
-
-
-// Start server
+// 👌 Ignore for now
+app.get("/register", authController.register);
+app.get("/login", authController.login);
+app.post("/register", authController.registerSubmit);
+app.post("/login", authController.loginSubmit);
+// const adminRouter = require("./routes/adminRoutes")
+// app.get("/admin", adminRouter)
 app.listen(3001, function () {
   console.log("Server running. Visit: http://localhost:3001 in your browser 🚀");
 });
-
