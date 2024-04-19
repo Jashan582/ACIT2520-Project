@@ -1,56 +1,37 @@
-let Database = require("../database");
+const passport = require("passport");
+const userController = require('./userController'); // Make sure this path is correct
 
 let authController = {
   login: (req, res) => {
-    res.render("auth/login");
+    res.render("login");
   },
 
   register: (req, res) => {
     res.render("auth/register");
   },
 
-  loginSubmit: (req, res) => {
-    const{email, password} = req.body;
-    const user = Database.users.find(user => user.email === email && user.password === password);
-    if(user){
-      req.session.user = { ...user};
-      res.redirect("/reminders");
-    }else{
-      res.redirect("/login");
-
-    }
-    // implement later
+  loginSubmit: (req, res, next) => {
+    passport.authenticate('local', {
+      successRedirect: '/reminders',
+      failureRedirect: '/login',
+      failureFlash: true
+    })(req, res, next);
   },
 
-  registerSubmit: (req, res) => {
-    //implement later
-    const{name, email, password} = req.body
-    const existingUser = Database.users.some(user => user.email === email);
-    if (existingUser) {
-      // Handle the case where the user tries to register with an existing email
-      res.status(409).send("An account with this email already exists.");
-      return; // Stop further execution in this callback
-    }
-    const id = Database.users.length
-    const user = {
-      id:id,
-      name: name,
-      email: email,
-      password: password,
-      isAdmin: false,
-      reminders:[
-      ],
-    }
-    console.log(user)
-    Database.users.push(user)
-    if(user){
-      req.session.user = { ...user};
-      res.redirect("/reminders");
-    }else{
-      res.redirect("/login");
-
-    }
+  registerSubmit: (req, res, next) => { // Don't forget to add 'next' if you're going to use it
+    const { name, email, password } = req.body;
+    userController.createUser(req.body, (err, user) => {
+      if (err) {
+        res.status(409).send("An account with this email already exists.");
+        return;
+      }
+      req.login(user, (err) => {
+        if (err) return next(err);
+        return res.redirect('/reminders');
+      });
+    });
   },
 };
 
 module.exports = authController;
+
