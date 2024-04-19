@@ -53,7 +53,7 @@ const userModel = {
     const existingUser = database.users.find((entry) => entry.email === user.email);
     if (!existingUser) {
       const newUserEntry = {
-        id: database.length + 1,
+        id: database.users.length + 1,
         name: user.name,
         email: user.email,
         password: user.password,
