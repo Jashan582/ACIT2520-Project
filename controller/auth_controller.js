@@ -1,4 +1,4 @@
-let Database = require("../database");
+const { userModel } = require("../models/userModel");
 
 let authController = {
   login: (req, res) => {
@@ -24,6 +24,11 @@ let authController = {
 
   registerSubmit: (req, res) => {
     //implement later
+    const { email, password, name } = req.body; // Destructure email along with any other needed properties
+
+    if (!email || !password || !name) { // Check for the existence of email, password, and name
+      return res.status(400).send("All fields are required.");
+    }
     const existingUser = userModel.findOne(email);
     if (existingUser) {
       req.flash('error', 'Email is already registered.');
