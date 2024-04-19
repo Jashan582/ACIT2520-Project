@@ -1,5 +1,6 @@
 let Database = require("../database");
-
+const isAdmin = require("../middleware/checkAdmin")
+const session = require('express-session');
 const adminController = {
     dashboard: (req, res) => {
         if (!req.user.isAdmin) {
@@ -20,15 +21,23 @@ const adminController = {
         if (!req.user.isAdmin) {
             return res.status(403).send("you are not the admin");
         }
-        
-        const { sessionId } = req.body;
-        const index = Database.sessions.findIndex(s => s.sessionId === sessionId);
-        if (index > -1) {
-            Database.sessions.splice(index, 1); 
-        }
-        
-        res.redirect('/admin/dashboard');
+        const sessionId = req.params.sessionId;
+        // console.log(sessionId)
+        req.sessionStore.destroy(sessionId, (err) => {
+          console.log("Im here")
+          console.log(req.sessionStore)
+          if (err) {
+            console.log("Error deleting session:", err);
+            req.flash("error", "fail to delete session");
+          }
+            else {
+              req.flash("success", "session revoked");
+            }
+            res.redirect('/admin');
+        })
     }
 };
         
         module.exports = adminController;
+
+

@@ -4,15 +4,15 @@ const path = require("path");
 const ejsLayouts = require("express-ejs-layouts");
 const session = require('express-session');
 const passport = require("./middleware/passport"); // Assuming you have defined this middleware
-
+const flash = require('connect-flash');
 const reminderController = require("./controller/reminder_controller");
 const authController = require("./controller/auth_controller");
 const authRoute = require("./routes/authRoute");
 const indexRoute = require("./routes/indexRoute");
 const adminRoute = require("./routes/adminRoute")
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
+app.use(express.urlencoded({ extended: true }));
+app.use(flash());
 app.use(
   session({
     secret: "secret",
@@ -25,6 +25,11 @@ app.use(
     },
   })
 );
+
+app.use((req, res, next) => {
+  req.session.id; // Access session ID
+  next();
+});
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -50,7 +55,7 @@ app.post("/reminder/delete/:id", reminderController.delete);
 //   console.log(req.user);
 
 //   console.log("Entire session object:");
-//   console.log(req.session);
+//   console.log(req.session.id);
 
 //   console.log(`Session details are: `);
 //   console.log(req.session.passport);
