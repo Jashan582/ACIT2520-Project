@@ -50,17 +50,17 @@ app.post("/reminder/update/:id", reminderController.update);
 app.post("/reminder/delete/:id", reminderController.delete);
 
 // Logging middleware
-// app.use((req, res, next) => {
-//   console.log(`User details are: `);
-//   console.log(req.user);
+app.use((req, res, next) => {
+  console.log(`User details are: `);
+  console.log(req.user);
 
-//   console.log("Entire session object:");
-//   console.log(req.session.id);
+  console.log("Entire session object:");
+  console.log(req.session.id);
 
-//   console.log(`Session details are: `);
-//   console.log(req.session.passport);
-//   next();
-// });
+  console.log(`Session details are: `);
+  console.log(req.session.passport);
+  next();
+});
 
 // Routes
 app.use("/", indexRoute);

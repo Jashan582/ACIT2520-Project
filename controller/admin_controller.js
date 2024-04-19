@@ -23,13 +23,14 @@ const adminController = {
             return res.status(403).send("you are not the admin");
         }
         const sessionId = req.params.sessionId;
-        // console.log(sessionId)
-        // console.log(req.sessionStore)
+        console.log(sessionId)
+        console.log(req.sessionStore)
         req.sessionStore.destroy(sessionId, (err) => {
           if (err) {
             console.error("Error deleting session:", err);
             req.flash("error", "Failed to delete session");
           } else {
+            console.log(req.sessionStore.session)
             req.flash("success", "Session deleted successfully");
           }
           res.redirect("/admin");

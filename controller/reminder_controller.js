@@ -4,7 +4,7 @@ const remindersController = {
   list: (req, res) => {
     if (req.isAuthenticated()) {
       const userReminders = database.users.find(user => user.id === req.user.id).reminders;
-      res.render("reminder/index", { reminders: userReminders });
+      res.render("reminder/index", { reminders: userReminders, authenticated: true });
     } else {
       res.redirect("/auth/login");
     }
@@ -81,7 +81,7 @@ const remindersController = {
   delete: (req, res) => {
     if (req.isAuthenticated()) {
       const userId = req.user.id;
-      const reminders =dDatabase.users[userId - 1].reminders;
+      const reminders =database.users[userId - 1].reminders;
       const index = reminders.findIndex(reminder => reminder.id.toString() === req.params.id);
       if (index !== -1) {
         reminders.splice(index, 1);

@@ -33,14 +33,11 @@ const localLogin = new LocalStrategy(
   (req, email, password, done) => {
     const user = userController.getUserByEmailIdAndPassword(email, password);
     if (user) {
-      console.log(`User ${user.email}, ${user.id}, ${user.name}, ${user.name} logged in at ${new Date()}`);
-      console.log("Session ID:", req.session.id);
       database.sessions.push({user: {userId: user.id, email: user.email, name: user.name, password: user.password,
                 isAdmin: user.isAdmin},
                 reminders:[user.reminders],
                 sessionId: req.session.id
-                })
-                console.log(database.sessions.reminders)
+                });
       return done(null, user);
     } else {
       return done(null, false, {
