@@ -24,33 +24,33 @@ let authController = {
 
   registerSubmit: (req, res) => {
     //implement later
-    const{name, email, password} = req.body
-    const existingUser = Database.users.some(user => user.email === email);
+    const existingUser = userModel.findOne(email);
     if (existingUser) {
-      // Handle the case where the user tries to register with an existing email
-      res.status(409).send("An account with this email already exists.");
-      return; // Stop further execution in this callback
+      req.flash('error', 'Email is already registered.');
+      return res.redirect('/register');
     }
-    const id = Database.users.length
-    const user = {
-      id:id,
+
+    const newUser = {
+      id: Math.floor(Math.random() * 1000),
       name: name,
       email: email,
       password: password,
-      isAdmin: false,
-      reminders:[
-      ],
-    }
-    console.log(user)
-    Database.users.push(user)
-    if(user){
-      req.session.user = { ...user};
-      res.redirect("/reminders");
-    }else{
-      res.redirect("/login");
+      role: 'user',
+      reminders: []
+    };
 
-    }
+    userModel.addUserToDatabase(newUser);
+
+    res.redirect('/login');
   },
-};
 
+  logout: (req, res) => {
+    req.logout((err) => {
+      if (err) {
+        console.error("Error occurred during logout:", err);
+      }
+      res.redirect("/login");
+    });
+  },
+}
 module.exports = authController;

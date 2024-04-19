@@ -34,22 +34,38 @@ const database = {
   sessions: []
 }
   
-  const userModel = {
-    findOne: (email) => {
-      const user = database.users.find((user) => user.email === email);
-      if (user) {
-        return user;
-      }
-      throw new Error(`Couldn't find user with email: ${email}`);
-    },
-    findById: (id) => {
-      const user = database.users.find((user) => user.id === id);
-      if (user) {
-        return user;
-      }
-      throw new Error(`Couldn't find user with id: ${id}`);
-    },
-  };
-  
+const userModel = {
+  findOne: (email) => {
+    const user = database.find((user) => user.email === email);
+    if (user) {
+      return user;
+    }
+    throw new Error(`Couldn't find user with email: ${email}`);
+  },
+  findById: (id) => {
+    const user = database.find((user) => user.id === id);
+    if (user) {
+      return user;
+    }
+    throw new Error(`Couldn't find user with id: ${id}`);
+  },
+  addUserToDatabase: (user) => {
+    const existingUser = database.find((entry) => entry.email === user.email);
+    if (!existingUser) {
+      const newUserEntry = {
+        id: database.length + 1,
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        role: 'user',
+        reminders: [],
+        sessionId: null
+      };
+      database.push(newUserEntry);
+      return newUserEntry;
+    }
+    return null;
+  },
+};
   module.exports = { database, userModel };
   
