@@ -24,3 +24,11 @@ Jashan Dosanjh
 
 Aaron
 1. <Register user>- This task is responsible for register users
+
+## April 18
+
+Jashan Dosanjh
+1. <Fix register,> This task is resposible for fixing the register so we can create new users
+
+2. <Changed everything to use passport,> This task is resposible for making sure all our code uses passport to work.
+
