@@ -50,7 +50,7 @@ const userModel = {
     throw new Error(`Couldn't find user with id: ${id}`);
   },
   addUserToDatabase: (user) => {
-    const existingUser = database.find((entry) => entry.email === user.email);
+    const existingUser = database.users.find((entry) => entry.email === user.email);
     if (!existingUser) {
       const newUserEntry = {
         id: database.length + 1,
