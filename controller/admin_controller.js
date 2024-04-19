@@ -30,7 +30,6 @@ const adminController = {
             console.error("Error deleting session:", err);
             req.flash("error", "Failed to delete session");
           } else {
-            console.log(req.sessionStore.session)
             req.flash("success", "Session deleted successfully");
           }
           res.redirect("/admin");
