@@ -40,7 +40,7 @@ const userModel = {
     if (user) {
       return user;
     }
-    throw new Error(`Couldn't find user with email: ${email}`);
+    // throw new Error(`Couldn't find user with email: ${email}`);
   },
   findById: (id) => {
     const user = database.users.find((user) => user.id === id);

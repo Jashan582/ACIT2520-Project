@@ -1,4 +1,4 @@
-const { userModel } = require("../models/userModel");
+const { database, userModel } = require("../models/userModel");
 
 let authController = {
   login: (req, res) => {
@@ -11,7 +11,7 @@ let authController = {
 
   loginSubmit: (req, res) => {
     const{email, password} = req.body;
-    const user = Database.users.find(user => user.email === email && user.password === password);
+    const user = database.users.find(user => user.email === email && user.password === password);
     if(user){
       req.session.user = { ...user};
       res.redirect("/reminders");
@@ -32,7 +32,7 @@ let authController = {
     const existingUser = userModel.findOne(email);
     if (existingUser) {
       req.flash('error', 'Email is already registered.');
-      return res.redirect('/register');
+      return res.redirect('/auth/register');
     }
 
     const newUser = {
@@ -46,7 +46,7 @@ let authController = {
 
     userModel.addUserToDatabase(newUser);
 
-    res.redirect('/login');
+    res.redirect('/auth/login');
   },
 
   logout: (req, res) => {
@@ -59,3 +59,4 @@ let authController = {
   },
 }
 module.exports = authController;
+
