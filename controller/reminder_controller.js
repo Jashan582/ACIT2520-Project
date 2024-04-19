@@ -1,5 +1,5 @@
-const Database = require("../database");
-
+// const Database = require("../database");
+const { Database} = require("../models/userModel");
 const remindersController = {
   list: (req, res) => {
     if (req.isAuthenticated()) {

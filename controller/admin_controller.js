@@ -1,4 +1,5 @@
-let Database = require("../database");
+// let Database = require("../database");
+const { Database} = require("../models/userModel");
 const isAdmin = require("../middleware/checkAdmin")
 const session = require('express-session');
 const adminController = {
