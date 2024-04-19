@@ -27,8 +27,15 @@ router.post("/login", (req, res, next) => {
 });
 
 router.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/auth/login");
+  req.logout((err) => {
+    if (err) {
+      // Handle error
+      console.error("Error logging out:", err);
+      return res.status(500).send("Error logging out");
+    }
+    // Redirect the user to the login page after successful logout
+    res.redirect("/auth/login");
+  });
 });
 router.get("/register", forwardAuthenticated, (req, res) => {
   res.render("auth/register"); // Assuming you have a view template named 'register.ejs'

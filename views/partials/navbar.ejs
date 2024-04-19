@@ -7,6 +7,10 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link" href="/reminders">Reminder List</a>
       <a class="nav-item nav-link" href="/reminder/new">Create</a>
+      <form action="/auth/logout" method="GET">
+        <input type="hidden" name="logout">
+        <button type="submit" class="btn btn-danger">Logout</button>
+      </form>
     </div>
   </div>
 </nav>

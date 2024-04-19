@@ -25,16 +25,15 @@ const adminController = {
         // console.log(sessionId)
         // console.log(req.sessionStore)
         req.sessionStore.destroy(sessionId, (err) => {
-          console.log("Im here")
           if (err) {
-            console.log("Error deleting session:", err);
-            req.flash("error", "fail to delete session");
+            console.error("Error deleting session:", err);
+            req.flash("error", "Failed to delete session");
+          } else {
+            req.flash("success", "Session deleted successfully");
           }
-            else {
-              req.flash("success", "session revoked");
-            }
-            res.redirect('/admin');
-        })
+          res.redirect("/admin");
+        });
+      
     }
 };
         
