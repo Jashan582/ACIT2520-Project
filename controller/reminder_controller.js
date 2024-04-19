@@ -1,9 +1,9 @@
 // const Database = require("../database");
-const { Database} = require("../models/userModel");
+const { database} = require("../models/userModel");
 const remindersController = {
   list: (req, res) => {
     if (req.isAuthenticated()) {
-      const userReminders = Database.users.find(user => user.id === req.user.id).reminders;
+      const userReminders = database.users.find(user => user.id === req.user.id).reminders;
       res.render("reminder/index", { reminders: userReminders });
     } else {
       res.redirect("/auth/login");
@@ -20,7 +20,7 @@ const remindersController = {
 
   listOne: (req, res) => {
     if (req.isAuthenticated()) {
-      const userReminder = Database.users.find(user => user.id === req.user.id)
+      const userReminder = database.users.find(user => user.id === req.user.id)
         .reminders.find(reminder => reminder.id == req.params.id);
       if (userReminder) {
         res.render("reminder/single-reminder", { reminderItem: userReminder });
@@ -41,7 +41,7 @@ const remindersController = {
         description: req.body.description,
         completed: false,
       };
-      Database.users[userId - 1].reminders.push(newReminder);
+      database.users[userId - 1].reminders.push(newReminder);
       res.redirect("/reminders");
     } else {
       res.redirect("/auth/login");
@@ -50,7 +50,7 @@ const remindersController = {
 
   edit: (req, res) => {
     if (req.isAuthenticated()) {
-      const userReminder = Database.users.find(user => user.id === req.user.id)
+      const userReminder = database.users.find(user => user.id === req.user.id)
         .reminders.find(reminder => reminder.id == req.params.id);
       if (userReminder) {
         res.render("reminder/edit", { reminderItem: userReminder });
@@ -65,7 +65,7 @@ const remindersController = {
   update: (req, res) => {
     if (req.isAuthenticated()) {
       const userId = req.user.id;
-      const reminders = Database.users[userId - 1].reminders;
+      const reminders = database.users[userId - 1].reminders;
       const reminderToUpdate = reminders.find(reminder => reminder.id === Number(req.params.id));
       if (reminderToUpdate) {
         reminderToUpdate.title = req.body.title;
@@ -81,7 +81,7 @@ const remindersController = {
   delete: (req, res) => {
     if (req.isAuthenticated()) {
       const userId = req.user.id;
-      const reminders = Database.users[userId - 1].reminders;
+      const reminders =dDatabase.users[userId - 1].reminders;
       const index = reminders.findIndex(reminder => reminder.id.toString() === req.params.id);
       if (index !== -1) {
         reminders.splice(index, 1);

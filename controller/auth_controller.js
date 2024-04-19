@@ -36,15 +36,15 @@ let authController = {
     }
 
     const newUser = {
-      id: Math.floor(Math.random() * 1000),
+      id: database.users.length+1,
       name: name,
       email: email,
       password: password,
       role: 'user',
       reminders: []
     };
-
-    userModel.addUserToDatabase(newUser);
+    database.users.push(newUser)
+    // userModel.addUserToDatabase(newUser);
 
     res.redirect('/auth/login');
   },
