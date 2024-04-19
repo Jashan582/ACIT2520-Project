@@ -23,9 +23,9 @@ const adminController = {
         }
         const sessionId = req.params.sessionId;
         // console.log(sessionId)
+        // console.log(req.sessionStore)
         req.sessionStore.destroy(sessionId, (err) => {
           console.log("Im here")
-          console.log(req.sessionStore)
           if (err) {
             console.log("Error deleting session:", err);
             req.flash("error", "fail to delete session");
